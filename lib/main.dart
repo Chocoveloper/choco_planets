@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  static final List<String> planets = [
+    'Mercury',
+    'Venus',
+    'Earth',
+    'Mars',
+    'Jupiter',
+    'Saturn',
+    'Uranus',
+    'Neptune',
+    'Pluto',
+  ];
+
   const MyApp({super.key});
 
   @override
@@ -11,23 +23,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Choco Planets',
       home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Choco Planets')),
+        appBar: AppBar(centerTitle: true, title: const Text('Choco Planets')),
         body: Center(
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
-            children: [
-              Text('Mercury'),
-              Text('Venus'),
-              Text('Earth'),
-              Text('Mars'),
-              Text('Jupiter'),
-              Text('Saturn'),
-              Text('Uranus'),
-              Text('Neptune'),
-              Text('Pluto'),
-            ],
+          child: ListView.builder(
+            itemCount: planets.length,
+            itemBuilder: (context, index){
+              return Text(planets[index]);
+            },
           ),
         ),
       ),
