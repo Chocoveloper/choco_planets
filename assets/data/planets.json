@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "name": "Mercury",
+        "description": "Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental.",
+        "image_path": "assets/images/Mercury.png",
+        "ra": 21.55,
+        "dec": -14.30
+    },
+    {
+        "id": 2,
+        "name": "Venus",
+        "description": "Venus es el segundo planeta del Sistema Solar en orden de proximidad al Sol. El planeta del amor y la belleza. Asociado con la armonía, el arte y la atracción..",
+        "image_path": "assets/images/Venus.png",
+        "ra": 19.12,
+        "dec": -21.45
+    },
+    {
+        "id": 3,
+        "name": "Earth",
+        "description": "La Tierra es el tercer planeta del Sistema Solar en orden de proximidad al Sol. Es el único planeta conocido que alberga vida. Nuestra casa azul, símbolo de la vida, la fertilidad y la conexión entre todos los seres.",
+        "image_path": "assets/images/Earth.png",
+        "ra": 0.0,
+        "dec": 0.0
+    },
+    {
+        "id": 4,
+        "name": "Mars",
+        "description": "Marte es el cuarto planeta del Sistema Solar en orden de proximidad al Sol. El guerrero. Simboliza la energía, la acción y la pasión, pero también la confrontación.",
+        "image_path": "assets/images/Mars.png",
+        "ra": 15.42,
+        "dec": -18.10
+    },
+    {
+        "id": 5,
+        "name": "Jupiter",
+        "description": "Jupiter es el quinto planeta del Sistema Solar en orden de proximidad al Sol. El gigante protector. Representa la expansión, la abundancia y la sabiduría.",
+        "image_path": "assets/images/Jupiter.png",
+        "ra": 5.10,
+        "dec": 23.15
+    },
+    {
+        "id": 6,
+        "name": "Saturn",
+        "description": "Saturno es el sexto planeta del Sistema Solar en orden de proximidad al Sol. El maestro del tiempo. Asociado con la disciplina, la paciencia y las lecciones de vida.",
+        "image_path": "assets/images/Saturn.png",
+        "ra": 23.05,
+        "dec": -7.40
+    },
+    {
+        "id": 7,
+        "name": "Uranus",
+        "description": "Urano es el séptimo planeta del Sistema Solar en orden de proximidad al Sol.  El revolucionario. Simboliza la innovación, lo inesperado y los cambios radicales..",
+        "image_path": "assets/images/Uranus.png",
+        "ra": 3.15,
+        "dec": 17.50
+    },
+    {
+        "id": 8,
+        "name": "Neptune",
+        "description": "Neptuno es el octavo planeta del Sistema Solar en orden de proximidad al Sol. El soñador. Relacionado con la imaginación, la espiritualidad y los misterios del inconsciente.",
+        "image_path": "assets/images/Neptune.png",
+        "ra": 23.92,
+        "dec": -2.15
+    },
+    {
+        "id": 8,
+        "name": "Pluto",
+        "description": "Pluton el planeta del renacimiento (aunque ya no se considera planeta oficialmente). El transformador. Representa la muerte, el renacimiento y las grandes transformaciones internas.",
+        "image_path": "assets/images/Pluto.png",
+        "ra": 20.18,
+        "dec": -22.30
+    },
+    {
+        "id": 9,
+        "name": "Sun",
+        "description": "El sol es el centro del Sistema Solar. El creador. Representa la vitalidad, la energía y la fuerza creadora. Es símbolo de la claridad, el liderazgo y la esencia de la vida.",
+        "image_path": "assets/images/Sun.png",
+        "ra": 22.28,
+        "dec": -10.82
+    },
+    {
+        "id": 10,
+        "name": "Moon",
+        "description": "La luna es el satélite natural de la Tierra. El serpiente. Representa la sensibilidad, la intuición y las emociones. Es símbolo de los ciclos, la feminidad y el misterio interior.",
+        "image_path": "assets/images/Moon.png",
+        "ra": 3.45,
+        "dec": 18.25
+    }
+]
