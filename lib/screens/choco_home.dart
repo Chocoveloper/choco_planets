@@ -1,5 +1,6 @@
 import 'package:choco_planets/core/verificar_version.dart';
 import 'package:choco_planets/models/planet_model.dart';
+import 'package:choco_planets/screens/choco_planet_detail.dart';
 import 'package:choco_planets/services/planet_local_service.dart';
 import 'package:choco_planets/widgets/planet_grild.dart';
 import 'package:flutter/material.dart';
@@ -178,7 +179,18 @@ class _ChocoHomeState extends State<ChocoHome> {
                 sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     // Usamos el nombre del planeta del JSON
-                    return PlanetGridColumn(name: planets[index].name);
+                    return PlanetGridColumn(
+                      name: planets[index].name,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ChocoPlanetDetail(planet: planets[index]),
+                          ),
+                        );
+                      },
+                    );
                   }, childCount: planets.length),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: columns,
