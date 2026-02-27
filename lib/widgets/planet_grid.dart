@@ -1,10 +1,20 @@
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class PlanetGridColumn extends StatefulWidget {
   final String name;
+  final String imageUrl;
+  final double velocity;
   final VoidCallback? onTap;
-  const PlanetGridColumn({super.key, required this.name, this.onTap});
+  const PlanetGridColumn({
+    super.key,
+    required this.name,
+    required this.imageUrl,
+    this.onTap,
+    required this.velocity,
+  });
 
   @override
   State<PlanetGridColumn> createState() => _PlanetGridColumnState();
@@ -80,16 +90,27 @@ class _PlanetGridColumnState extends State<PlanetGridColumn>
                       scale: isSaturn ? 1.2 : 1.0,
                       child: Hero(
                         tag: 'planet-${widget.name}',
-                        child: Container(
-                          decoration: BoxDecoration(
-                            //shape: BoxShape.circle,
-                            color: Colors.transparent,
-                            boxShadow: const [],
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/${widget.name}.png',
-                              ),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.imageUrl,
+
+                          // 1. EL LOADING (Usa tu Lottie SpaceTravel)
+                          placeholder: (context, url) => Center(
+                            child: Lottie.asset(
+                              'assets/lottie/SpaceTravel.json',
                               fit: BoxFit.contain,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Lottie.asset(
+                            'assets/lottie/404Astronaut.json',
+                            fit: BoxFit.contain,
+                          ),
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),

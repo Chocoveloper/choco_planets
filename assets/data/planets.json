@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Mercury",
-        "description": "Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental. Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental. Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental. Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental. Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental.",
+        "description": "Mercurio es el planeta más pequeño del Sistema Solar y el más cercano al Sol. El mensajero veloz. Representa la comunicación, la inteligencia y la rapidez mental.",
         "image_path": "assets/images/Mercury.png",
         "ra": 21.55,
         "dec": -14.30
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "name": "Venus",
-        "description": "Venus es el segundo planeta del Sistema Solar en orden de proximidad al Sol. El planeta del amor y la belleza. Asociado con la armonía, el arte y la atracción..",
+        "description": "Venus es el segundo planeta del Sistema Solar en orden de proximidad al Sol. El planeta del amor y la belleza. Asociado con la armonía, el arte y la atracción.",
         "image_path": "assets/images/Venus.png",
         "ra": 19.12,
         "dec": -21.45
@@ -50,7 +50,7 @@
     {
         "id": 7,
         "name": "Uranus",
-        "description": "Urano es el séptimo planeta del Sistema Solar en orden de proximidad al Sol.  El revolucionario. Simboliza la innovación, lo inesperado y los cambios radicales..",
+        "description": "Urano es el séptimo planeta del Sistema Solar en orden de proximidad al Sol.  El revolucionario. Simboliza la innovación, lo inesperado y los cambios radicales.",
         "image_path": "assets/images/Uranus.png",
         "ra": 3.15,
         "dec": 17.50

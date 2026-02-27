@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1033923053216",
+    "project_id": "choco-planets",
+    "storage_bucket": "choco-planets.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033923053216:android:ae80f486e491307ad9abc5",
+        "android_client_info": {
+          "package_name": "com.chocoveloper.choco_planets"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAPMf5vh45VDMF1_p3AWHZB_BmCdvxz9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

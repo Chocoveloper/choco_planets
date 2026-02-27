@@ -22,3 +22,15 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+plugins {
+    // Esta versión la aceptó en el paso anterior
+    id("com.android.application") version "8.11.1" apply false
+    
+    // AQUÍ EL CAMBIO: Ponemos la 2.2.20 que su terminal exige
+    id("org.jetbrains.kotlin.android") version "2.2.20" apply false
+    
+    id("dev.flutter.flutter-gradle-plugin") apply false
+    
+    // Nuestra pieza de Firebase
+    id("com.google.gms.google-services") version "4.4.1" apply false
+}

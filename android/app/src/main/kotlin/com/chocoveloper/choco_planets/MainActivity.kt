@@ -1,4 +1,4 @@
-package com.example.choco_planets
+package com.chocoveloper.choco_planets
 
 import io.flutter.embedding.android.FlutterActivity
 

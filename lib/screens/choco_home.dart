@@ -1,10 +1,10 @@
 import 'package:choco_planets/core/verificar_version.dart';
-import 'package:choco_planets/models/planet_model.dart';
 import 'package:choco_planets/screens/choco_planet_detail.dart';
-import 'package:choco_planets/services/planet_local_service.dart';
-import 'package:choco_planets/widgets/planet_grild.dart';
+import 'package:choco_planets/widgets/planet_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:choco_planets/models/planet_cloud_model.dart'; // El nuevo
+import 'package:choco_planets/services/planet_cloud_service.dart'; // El nuevo
 
 class ChocoHome extends StatefulWidget {
   const ChocoHome({super.key});
@@ -14,8 +14,7 @@ class ChocoHome extends StatefulWidget {
 }
 
 class _ChocoHomeState extends State<ChocoHome> {
-  final PlanetService _planetService = PlanetService();
-  late Future<List<PlanetModelLocal>> _planetsFuture;
+  final PlanetCloudService _cloudService = PlanetCloudService();
 
   @override
   void initState() {
@@ -24,7 +23,6 @@ class _ChocoHomeState extends State<ChocoHome> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _verifyUpdate();
     });
-    _planetsFuture = _planetService.loadPlanets();
   }
 
   // Método para consultar al servicio de versión
@@ -40,6 +38,103 @@ class _ChocoHomeState extends State<ChocoHome> {
   }
 
   // El diálogo que verá el usuario
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    int columns = width > 600 ? 5 : 3;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF0B0D17),
+      body: CustomScrollView(
+        slivers: [
+          _buildAppBar(),
+          StreamBuilder<List<PlanetModelCloud>>(
+            stream: _cloudService.getPlanets(),
+            builder: (context, snapshot) {
+              // 1. Si está cargando (ni ha empezado ni ha fallado)
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SliverFillRemaining(
+                  child: Center(
+                    child: CircularProgressIndicator(color: Colors.brown),
+                  ),
+                );
+              }
+
+              // 2. Si hubo un error (no encontró el archivo, etc.)
+              if (snapshot.hasError) {
+                return SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      'Error en el radar, no hallamos los planetas: ${snapshot.error}',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                );
+              }
+
+              // 3. Si todo salió bien, ¡mostramos la parrilla!
+              // snapshot.data es la lista de planetas que devolvió el servicio
+              final planets = snapshot.data ?? [];
+              debugPrint(
+                "📡 Planetas recibidos de São Paulo: ${planets.length}",
+              );
+
+              return SliverPadding(
+                padding: EdgeInsetsGeometry.all(15.0),
+                sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    // Usamos el nombre del planeta del JSON
+                    return PlanetGridColumn(
+                      imageUrl: planets[index].image2d,
+                      velocity: planets[index].velocity,
+                      name: planets[index].name,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ChocoPlanetDetail(planet: planets[index]),
+                          ),
+                        );
+                      },
+                    );
+                  }, childCount: planets.length),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 15,
+                    childAspectRatio: 0.75,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    return SliverAppBar(
+      expandedHeight: 120.0,
+      pinned: true,
+      flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
+        title: const Text(
+          'Choco Universe',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            color: Colors.white,
+          ),
+        ),
+        background: Container(color: Colors.brown[900]),
+      ),
+    );
+  }
+
   void _showUpdateDialog({required String url, required String version}) {
     showDialog(
       context: context,
@@ -138,91 +233,6 @@ class _ChocoHomeState extends State<ChocoHome> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    int columns = width > 600 ? 5 : 3;
-
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0D17),
-      body: FutureBuilder<List<PlanetModelLocal>>(
-        future: _planetsFuture,
-        builder: (context, snapshot) {
-          // 1. Si está cargando (ni ha empezado ni ha fallado)
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          // 2. Si hubo un error (no encontró el archivo, etc.)
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                'Error al cargar planetas',
-                style: TextStyle(color: Colors.white),
-              ),
-            );
-          }
-
-          // 3. Si todo salió bien, ¡mostramos la parrilla!
-          // snapshot.data es la lista de planetas que devolvió el servicio
-          final planets = snapshot.data!;
-
-          return CustomScrollView(
-            slivers: [
-              _buildAppBar(),
-              SliverPadding(
-                padding: EdgeInsetsGeometry.all(15.0),
-                sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    // Usamos el nombre del planeta del JSON
-                    return PlanetGridColumn(
-                      name: planets[index].name,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ChocoPlanetDetail(planet: planets[index]),
-                          ),
-                        );
-                      },
-                    );
-                  }, childCount: planets.length),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: columns,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
-                    childAspectRatio: 0.75,
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return SliverAppBar(
-      expandedHeight: 120.0,
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
-        title: const Text(
-          'Choco Universe',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            color: Color.fromARGB(255, 52, 3, 60),
-          ),
-        ),
-        background: Container(color: Colors.brown[600]),
       ),
     );
   }
